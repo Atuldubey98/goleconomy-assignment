@@ -108,14 +108,14 @@ class UserController {
       }
       const user = await User.findOne({ email });
       if (!user) {
-        throw createHttpError(404, "USER_EMAIL_NOT_FOUND");
+        throw createHttpError(400, "USER_EMAIL_NOT_FOUND");
       }
       const hasPasswordMatched: boolean = await bcryptjs.compare(
         password,
         user.password.toString()
       );
       if (!hasPasswordMatched) {
-        throw createHttpError(400, "USER_PASSWORD_EROR");
+        throw createHttpError(400, "USER_PASSWORD_ERROR");
       }
       const authenticatedUser: AuthenticatedUser = {
         email,
