@@ -3,7 +3,7 @@ import createHttpError, { isHttpError } from "http-errors";
 import mongoose from "mongoose";
 import config from "./config";
 import userRouter from "./routes/user.routes";
-import { TokenExpiredError } from "jsonwebtoken";
+import { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 const app: Application = express();
 
 mongoose.connect(config.MONGO_URI);
@@ -25,6 +25,10 @@ app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   }
   if (error instanceof TokenExpiredError) {
     message = "TOKEN_EXPIRED";
+    statusCode = 403;
+  }
+  if (error instanceof JsonWebTokenError) {
+    message = "TOKEN_ERROR";
     statusCode = 403;
   }
   if (isHttpError(error)) {

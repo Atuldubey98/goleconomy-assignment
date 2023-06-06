@@ -14,14 +14,14 @@ export default async function checkAuthentication(
       throw createHttpError(401, "UNAUTHORIZED");
     }
     const accessToken = authorizationHeader.substring(7);
+    console.log(accessToken);
+    
     const userPayload = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET);
 
     //@ts-ignore
     req.user = userPayload;
     next();
   } catch (error) {
-    console.log(error);
-
     next(error);
   }
 }

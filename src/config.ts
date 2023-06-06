@@ -6,10 +6,7 @@ export type ConfigEnvVariables = {
   ACCESS_TOKEN_SECRET: string;
   REFRESH_TOKEN_SECRET: string;
 };
-const MONGO_URI: Secret =
-  process.env.NODE_ENV === "development"
-    ? `mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`
-    : process.env.MONGO_URI || "";
+const MONGO_URI: Secret = process.env.MONGO_URI || "";
 const ACCESS_TOKEN_SECRET: string = process.env.ACCESS_TOKEN_SECRET || "";
 const REFRESH_TOKEN_SECRET: string = process.env.REFRESH_TOKEN_SECRET || "";
 
