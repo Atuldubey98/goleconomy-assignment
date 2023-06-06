@@ -1,15 +1,27 @@
+import { Secret } from "jsonwebtoken";
+
 export type ConfigEnvVariables = {
   PORT: number;
   MONGO_URI: string;
+  ACCESS_TOKEN_SECRET: string;
+  REFRESH_TOKEN_SECRET: string;
 };
-const MONGO_URI: string =
+const MONGO_URI: Secret =
   process.env.NODE_ENV === "development"
-    ? "mongodb://127.0.0.1:27017/goleconomy"
+    ? `mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`
     : process.env.MONGO_URI || "";
+const ACCESS_TOKEN_SECRET: string = process.env.ACCESS_TOKEN_SECRET || "";
+const REFRESH_TOKEN_SECRET: string = process.env.REFRESH_TOKEN_SECRET || "";
+
 const PORT: number = isNaN(Number(process.env.PORT))
   ? 9000
   : Number(process.env.PORT);
 
-const config: ConfigEnvVariables = { PORT, MONGO_URI };
+const config: ConfigEnvVariables = {
+  PORT,
+  MONGO_URI,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+};
 
 export default config;
