@@ -126,7 +126,7 @@ class UserController {
         authenticatedUser,
         config.ACCESS_TOKEN_SECRET,
         {
-          expiresIn: "120s",
+          expiresIn: "1d",
         }
       );
       const refreshToken = jwt.sign(

@@ -17,7 +17,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError(404, message));
 });
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
-  let message = "An unknown error occured.";
+  let message = "UNKNOWN_ERROR";
   let statusCode = 500;
   if (error instanceof mongoose.Error) {
     message = error.message;
